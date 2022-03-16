@@ -1,0 +1,57 @@
+.smallDataLine {
+    display: flex;
+    flex-direction: row;
+    border: 1px black solid;
+    border-radius: 30px;
+    margin: 10px;
+    align-items: center;
+    justify-content: space-around;
+    width: 70%;
+}
+.smallData {
+    margin: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+h4 {
+    margin: 0px;
+}
+.imgSmall {
+    object-fit: cover;
+    width: "300px";
+    height: "300px";
+}
+.typeColumn {
+    display: flex;
+    flex-direction: column;
+}
+.type {
+    border: 1px black solid;
+    border-radius: 30px;
+    margin: 10px;
+    padding: 5px;
+    font-weight: 600;
+    width: 80px;
+}
+.idNameWrapper {
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+}
+.idWrapper {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+.nameWrapper {
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+}
+.smallTypeWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}

@@ -1,0 +1,43 @@
+.moveData {
+    width: 90%;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 4px black;
+    align-items: center;
+    justify-content: space-between;
+}
+.nameMove {
+    font-weight: 600;
+}
+.moveDescription {
+    margin: 5px;
+    width: 10%;
+}
+.idMove {
+    width: 7%;
+}
+.nameMove {
+    width: 18%;
+}
+.accuracyMove {
+    width: 12%;
+}
+.classMove {
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 4px black;
+}
+.typeMove {
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 4px black;
+}
+.levelMove {
+    width: 20%;
+}

@@ -1,0 +1,140 @@
+.fullDataPokemon {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin: 50px;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.rowIdName {
+    width: 50%;
+}
+.emphasized {
+    font-size: 20px;
+    font-weight: 600;
+}
+.baseInfoPokemon {
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 4px black;
+    min-width: 30%;
+    background-color: white;
+}
+.encounterPart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+.encountersList {
+    display: flex;
+    flex-direction: column;
+}
+.movesList {
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 1px 2px 4px black;
+    background-color: white;
+}
+.descriptionPokemon {
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 10px;
+    align-items: baseline;
+    box-shadow: 1px 2px 4px black;
+    font-size: 20px;
+    background-color: white;
+    width: 50%;
+}
+p {
+    margin: 0px;
+}
+h4 {
+    margin: 5px;
+}
+.typeWrapper,
+.abilityWrapper {
+    margin: 5px 20px 5px 20px;
+    padding: 5px;
+    border: 1px solid grey;
+    box-shadow: 1px 2px 4px black;
+    border-radius: 5px;
+}
+.typeWrapper {
+    width: 60px;
+}
+.abilityWrapper {
+    width: 180px;
+}
+.flavorText {
+    text-align: left;
+}
+.miniTitle {
+    font-weight: 700;
+    font-style: italic;
+}
+.abilitiesWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    align-items: center;
+}
+.evolutionWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-around;
+}
+.imgEvolution {
+    border: 1px solid black;
+    border-radius: 30px;
+    width: 20%;
+    height: 20%;
+}
+.arrowEvolution {
+    width: 10%;
+    height: 10%;
+}
+.mainImg {
+    width: 80%;
+    height: 80%;
+}
+.move {
+    background-color: white;
+    height: 20%;
+    margin: 3px;
+}
+.triangleLoader {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
