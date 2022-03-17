@@ -32,7 +32,7 @@ function getFirstForm(firstFormData) {
 }
 function getSecondForm(secondFormData) {
     if (secondFormData[0] === undefined) {
-        return 'none';
+        return;
     }
     const secondForm = [];
     for (let i = 0; i < secondFormData.length; i++) {
