@@ -1,7 +1,7 @@
 import { useState } from "react";
+import NavPage from "../components/NavPage";
 import { SmallDataPokemon } from "../components/SmallDataPokemon";
 import "./PokemonListPage.css";
-import arrowForward from "../assets/arrowForward.png";
 
 export function PokemonListPage() {
     const [idPage, setIdPage] = useState(1);
@@ -18,87 +18,19 @@ export function PokemonListPage() {
 
     return (
         <>
-            <div className="navPage">
-                <div
-                    key={`arrowLeft${idPage}`}
-                    className={`arrowPage`}
-                    onClick={() => {
-                        controller.abort();
-                        pokemonlist.slice(0, pokemonlist.length);
-                        idPage > 1
-                            ? setIdPage(idPage - 1)
-                            : setIdPage(89 + idPage);
-                    }}
-                >
-                    <img
-                        src={arrowForward}
-                        alt="arrowForward"
-                        className="imageReverse"
-                        width={`50px`}
-                        height={`50px`}
-                    />
-                </div>
-                <h4>{idPage}/90</h4>
-                <div
-                    key={`arrowRight${idPage}`}
-                    className={`arrowPage`}
-                    onClick={() => {
-                        controller.abort();
-                        pokemonlist.slice(0, pokemonlist.length);
-                        idPage < 90
-                            ? setIdPage(idPage + 1)
-                            : setIdPage(idPage - 89);
-                    }}
-                >
-                    <img
-                        src={arrowForward}
-                        alt="arrowBackward"
-                        width={`50px`}
-                        height={`50px`}
-                    />
-                </div>
-            </div>
+            <NavPage
+                idPage={idPage}
+                controller={controller}
+                pokemonlist={pokemonlist}
+                setIdPage={setIdPage}
+            />
             <div className="pokemonList">{pokemonlist}</div>
-            <div className="navPage">
-                <div
-                    key={`arrowLeft${idPage}`}
-                    className={`arrowPage`}
-                    onClick={() => {
-                        controller.abort();
-                        pokemonlist.slice(0, pokemonlist.length);
-                        idPage > 1
-                            ? setIdPage(idPage - 1)
-                            : setIdPage(89 + idPage);
-                    }}
-                >
-                    <img
-                        src={arrowForward}
-                        alt="arrowForward"
-                        className="imageReverse"
-                        width={`50px`}
-                        height={`50px`}
-                    />
-                </div>
-                <h4>{idPage}/90</h4>
-                <div
-                    key={`arrowRight${idPage}`}
-                    className={`arrowPage`}
-                    onClick={() => {
-                        controller.abort();
-                        pokemonlist.slice(0, pokemonlist.length);
-                        idPage < 90
-                            ? setIdPage(idPage + 1)
-                            : setIdPage(idPage - 89);
-                    }}
-                >
-                    <img
-                        src={arrowForward}
-                        alt="arrowBackward"
-                        width={`50px`}
-                        height={`50px`}
-                    />
-                </div>
-            </div>
+            <NavPage
+                idPage={idPage}
+                controller={controller}
+                pokemonlist={pokemonlist}
+                setIdPage={setIdPage}
+            />
         </>
     );
 }
