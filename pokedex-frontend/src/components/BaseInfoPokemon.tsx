@@ -1,4 +1,3 @@
-import "./BaseInfoPokemon.css";
 import { PokemonData } from "../routes/FullDataPokemon";
 
 type Props = {

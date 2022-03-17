@@ -1,4 +1,3 @@
-import "./DescriptionPokemon.css";
 import { PokemonData } from "../routes/FullDataPokemon";
 import EvolutionWrapper from "./EvolutionWrapper";
 
