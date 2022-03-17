@@ -18,8 +18,12 @@ export class SpeciesService {
                     ),
                     genera: getGenera(data.genera),
                     originGeneration: data.generation.name,
-                    habitat: data.habitat.name,
-                    shape: data.shape.name,
+                    habitat: () => {
+                        data.habitat ? data.habitat.name : undefined;
+                    },
+                    shape: () => {
+                        data.shape ? data.shape.name : undefined;
+                    },
                     color: data.color.name,
                 })),
             );
