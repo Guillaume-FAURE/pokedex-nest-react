@@ -1,12 +1,11 @@
 import "./App.css";
-import { PokemonList } from "./routes/PokemonList";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { PokemonListPage } from "./routes/PokemonListPage";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
     return (
         <div className="App">
-            <div className="fullDataEmplacement"></div>
-            <PokemonList />
+            <PokemonListPage />
         </div>
     );
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, useParams } from "react-router-dom";
-import { json } from "stream/consumers";
+import { useParams } from "react-router-dom";
 import "./FullDataPokemon.css";
 import { MovePokemon } from "./MovePokemon";
 import { Triangle } from "react-loader-spinner";

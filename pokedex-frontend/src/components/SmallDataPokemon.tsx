@@ -49,6 +49,7 @@ export function SmallDataPokemon({ idPokemon }: AppProps) {
                     key={`${idPokemon}`}
                     className={`${name} smallDataLine`}
                     to={`/pokemon/${idPokemon}`}
+                    target="_blank"
                 >
                     <div className="idNameWrapper">
                         <div className="idWrapper smallData">
