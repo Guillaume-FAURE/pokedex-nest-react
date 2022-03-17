@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import "./FullDataPokemon.css";
 import { MovePokemon } from "./MovePokemon";
 import { Triangle } from "react-loader-spinner";
-import DescriptionPokemon from "./DescriptionPokemon";
+import DescriptionPokemon from "../components/DescriptionPokemon";
+import BaseInfoPokemon from "../components/BaseInfoPokemon";
+import StatsPokemon from "../components/StatsPokemon";
 
 export type PokemonTypes = {
     name: string;
@@ -32,14 +34,14 @@ export type PokemonLocation = {
     version: string;
 };
 export type PokemonFirstForm = {
-    name: string,
-    id: number,
-}
+    name: string;
+    id: number;
+};
 export type PokemonForm = {
-    name: string,
-    level: number,
-    id: number,
-}
+    name: string;
+    level: number;
+    id: number;
+};
 export type PokemonData = {
     id: string;
     name: string;
@@ -166,154 +168,9 @@ export function FullDataPokemon() {
                 <div className={`fullDataPokemon id${idPokemon}`}>
                     <div className="row">
                         <DescriptionPokemon data={data} />
-                        <div className="column baseInfoPokemon">
-                            <div className="row rowIdName">
-                                <p className="emphasized">#{data?.id}</p>
-                                <p>
-                                    Nom :{" "}
-                                    <span className="emphasized">
-                                        {data?.name}
-                                    </span>
-                                </p>
-                            </div>
-                            <img
-                                src={data?.fullSprite}
-                                alt={data?.name}
-                                className="mainImg"
-                            />
-                            <p>BaseExperience: {data?.baseExperience}</p>
-                            {data?.heldItems !== undefined ? (
-                                <p>{`Held Items : ${data?.heldItems}`}</p>
-                            ) : null}
-                            <p>Height : {data?.height}</p>
-                            <p>Weight : {data?.weight}</p>
-                            <h4>Types</h4>
-                            <div className="row">
-                                {data?.types.map((type, index) => {
-                                    return (
-                                        <div
-                                            key={index}
-                                            className="typeWrapper"
-                                        >
-                                            {type.name}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
+                        <BaseInfoPokemon data={data} />
                     </div>
-                    <div className="statsPokemon column">
-                        <div className="row stat">
-                            <div className="summaryStat">
-                                <h4 className="titleStat">HP</h4>
-                                {data?.stats.hp}
-                            </div>
-                            <div className="backStat">
-                                <div
-                                    className="hpStat"
-                                    style={{
-                                        width: `${
-                                            data && data.stats.hp / 2.55
-                                        }%`,
-                                        height: `100%`,
-                                        backgroundColor: `#f53006`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                        <div className="row stat">
-                            <div className="summaryStat row">
-                                <h4 className="titleStat">ATTACK</h4>
-                                {data?.stats.attack}
-                            </div>
-                            <div className="backStat">
-                                <div
-                                    className="attackStat"
-                                    style={{
-                                        width: `${
-                                            data && data.stats.attack / 2.55
-                                        }%`,
-                                        height: `100%`,
-                                        backgroundColor: `#f53006`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                        <div className="row stat">
-                            <div className="summaryStat">
-                                <h4 className="titleStat">DEFENSE</h4>
-                                {data?.stats.defense}
-                            </div>
-                            <div className="backStat">
-                                <div
-                                    className="defenseStat"
-                                    style={{
-                                        width: `${
-                                            data && data.stats.defense / 2.55
-                                        }%`,
-                                        height: `100%`,
-                                        backgroundColor: `#f53006`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                        <div className="row stat">
-                            <div className="summaryStat">
-                                <h4 className="titleStat">HP</h4>
-                                {data?.stats.hp}
-                            </div>
-                            <div className="backStat">
-                                <div
-                                    className="specialAttackStat"
-                                    style={{
-                                        width: `${
-                                            data &&
-                                            data.stats.specialAttack / 2.55
-                                        }%`,
-                                        height: `100%`,
-                                        backgroundColor: `#f53006`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                        <div className="row stat">
-                            <div className="summaryStat">
-                                <h4 className="titleStat">SPECIAL DEFENSE</h4>
-                                {data?.stats.specialDefense}
-                            </div>
-                            <div className="backStat">
-                                <div
-                                    className="specialDefenseStat"
-                                    style={{
-                                        width: `${
-                                            data &&
-                                            data.stats.specialDefense / 2.55
-                                        }%`,
-                                        height: `100%`,
-                                        backgroundColor: `#f53006`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                        <div className="row stat">
-                            <div className="summaryStat">
-                                <h4 className="titleStat">SPEED</h4>
-                                {data?.stats.speed}
-                            </div>
-                            <div className="backStat">
-                                <div
-                                    className="speedStat"
-                                    style={{
-                                        width: `${
-                                            data && data.stats.speed / 2.55
-                                        }%`,
-                                        height: `100%`,
-                                        backgroundColor: `#f53006`,
-                                    }}
-                                ></div>
-                            </div>
-                        </div>
-                    </div>
+                    <StatsPokemon data={data} />
                     <div className="movesList">
                         <h4>Moves</h4>
                         {data?.moves.map((move, index) => {
