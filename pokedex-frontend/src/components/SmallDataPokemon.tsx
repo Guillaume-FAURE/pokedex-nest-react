@@ -8,6 +8,8 @@ type AppProps = {
 };
 
 export function SmallDataPokemon({ idPokemon }: AppProps) {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const [id, setId] = useState(0);
     const [name, setName] = useState("");
     const [sprite, setSprite] = useState("");
@@ -16,7 +18,9 @@ export function SmallDataPokemon({ idPokemon }: AppProps) {
 
     useEffect(() => {
         const fetcher = async () => {
-            await fetch(`http://localhost:5000/pokemon/${idPokemon}`, {})
+            await fetch(`http://localhost:5000/pokemon/${idPokemon}`, {
+                signal,
+            })
                 .then((res) => {
                     return res.json();
                 })

@@ -23,6 +23,7 @@ export class PokemonService {
                     abilities: getAbilities(data.abilities),
                     moves: getMoves(data.moves),
                     species: getSpeciesId(data.species.url),
+                    stats: getStats(data.stats),
                     baseExperience: data.base_experience,
                     heldItems: data.heldItems,
                     locationArea: data.location_area_encounters,
@@ -30,6 +31,20 @@ export class PokemonService {
             );
         return data;
     }
+}
+function getStats(statsData: Array<any>) {
+    return {
+        hp: statsData[0].base_stat,
+        attack: statsData[1].base_stat,
+        defense: statsData[2].base_stat,
+        specialAttack: statsData[3].base_stat,
+        specialDefense: statsData[4].base_stat,
+        speed: statsData[5].base_stat,
+        totalStat: statsData.reduce(
+            (total, currentValue) => (total = total + currentValue.base_stat),
+            0,
+        ),
+    };
 }
 function getSpeciesId(speciesUrl: string) {
     return speciesUrl

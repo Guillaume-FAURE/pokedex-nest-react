@@ -30,6 +30,14 @@ export function FullDataPokemon() {
     ]);
     const [thirdForm, setThirdForm] = useState([{ name: "", level: 0, id: 0 }]);
     const [location, setLocation] = useState([{ name: "", version: "" }]);
+    const [stats, setStats] = useState({
+        hp: 0,
+        attack: 0,
+        defense: 0,
+        specialAttack: 0,
+        specialDefense: 0,
+        speed: 0,
+    });
 
     const [spinnerLoading, setSpinnerLoading] = useState(true);
 
@@ -52,6 +60,7 @@ export function FullDataPokemon() {
                         setSpecies(result.species);
                         setBaseExperience(result.baseExperience);
                         setHeldItems(result.heldItems);
+                        setStats(result.stats);
                         console.log("endfetchpokemon");
                     },
                     (error) => {
@@ -277,6 +286,56 @@ export function FullDataPokemon() {
                                         </div>
                                     );
                                 })}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="statsPokemon column">
+                        <div className="row stat">
+                            <div className="summaryStat">
+                                <h4 className="titleStat">HP</h4>
+                                {stats.hp}
+                            </div>
+                            <div className="backStat">
+                                <div className="hpStat"></div>
+                            </div>
+                        </div>
+                        <div className="row stat">
+                            <div className="summaryStat row">
+                                <h4 className="titleStat">ATTACK</h4>
+                                {stats.attack}
+                            </div>
+                            <div className="backStat">
+                                <div className="attackStat"></div>
+                            </div>
+                        </div>
+                        <div className="row stat">
+                            <div className="summaryStat">
+                                <h4 className="titleStat">DEFENSE</h4>
+                                {stats.defense}
+                            </div>
+                            <div className="backStat">
+                                <div className="defenseStat"></div>
+                            </div>
+                        </div>
+                        <div className="row stat">
+                            <div className="summaryStat">
+                                <h4 className="titleStat">HP</h4>
+                                {stats.hp}
+                            </div>
+                            <div className="backStat">
+                                <div className="specialAttackStat"></div>
+                            </div>
+                        </div>
+                        <div className="row stat">
+                            <h4 className="titleStat">SPECIAL DEFENSE</h4>
+                            <div className="backStat">
+                                <div className="specialDefenseStat"></div>
+                            </div>
+                        </div>
+                        <div className="row stat">
+                            <h4 className="titleStat">SPEED</h4>
+                            <div className="backStat">
+                                <div className="speedStat"></div>
                             </div>
                         </div>
                     </div>
