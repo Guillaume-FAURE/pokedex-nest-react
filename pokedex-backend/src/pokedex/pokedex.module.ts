@@ -7,10 +7,8 @@ import { EvolutionChainService } from './services/evolution-chain.service';
 import { SpeciesController } from './controllers/species.controller';
 import { EvolutionChainController } from './controllers/evolution-chain.controller';
 import { MovesService } from './services/moves.service';
-import { LocationService } from './services/location.service';
 import { LocationAreaEnconterService } from './services/location-area-enconter.service';
 import { MovesController } from './controllers/moves.controller';
-import { LocationController } from './controllers/location.controller';
 import { LocationAreaEnconterController } from './controllers/location-area-enconter.controller';
 
 @Module({
@@ -20,7 +18,6 @@ import { LocationAreaEnconterController } from './controllers/location-area-enco
         SpeciesService,
         EvolutionChainService,
         MovesService,
-        LocationService,
         LocationAreaEnconterService,
     ],
     controllers: [
@@ -28,7 +25,6 @@ import { LocationAreaEnconterController } from './controllers/location-area-enco
         SpeciesController,
         EvolutionChainController,
         MovesController,
-        LocationController,
         LocationAreaEnconterController,
     ],
 })
