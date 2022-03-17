@@ -3,42 +3,72 @@ import { useParams } from "react-router-dom";
 import "./FullDataPokemon.css";
 import { MovePokemon } from "./MovePokemon";
 import { Triangle } from "react-loader-spinner";
+import DescriptionPokemon from "./DescriptionPokemon";
+
+export type PokemonTypes = {
+    name: string;
+    description: string;
+};
+
+export type PokemonAbilities = {
+    name: string;
+    description: string;
+};
+
+export type PokemonStats = {
+    hp: number;
+    attack: number;
+    defense: number;
+    specialAttack: number;
+    specialDefense: number;
+    speed: number;
+};
+export type PokemonMove = {
+    id: number;
+    learning: string;
+};
+export type PokemonLocation = {
+    name: string;
+    version: string;
+};
+export type PokemonFirstForm = {
+    name: string,
+    id: number,
+}
+export type PokemonForm = {
+    name: string,
+    level: number,
+    id: number,
+}
+export type PokemonData = {
+    id: string;
+    name: string;
+    fullSprite: string;
+    height: number;
+    weight: number;
+    types: PokemonTypes[];
+    abilities: PokemonAbilities[];
+    species: string;
+    baseExperience: number;
+    heldItems: string;
+    evolutionChain: string;
+    genera: string;
+    originGeneration: string;
+    habitat: string;
+    shape: string;
+    color: string;
+    flavorText: string;
+    stats: PokemonStats;
+    moves: PokemonMove[];
+    location: PokemonLocation[];
+    firstForm: PokemonFirstForm;
+    secondForm: PokemonForm[];
+    thirdForm: PokemonForm[];
+};
 
 export function FullDataPokemon() {
     const { idPokemon } = useParams();
-    const [id, setId] = useState(idPokemon);
-    const [name, setName] = useState("");
-    const [fullSprite, setSprite] = useState("");
-    const [height, setHeight] = useState(0);
-    const [weight, setWeight] = useState(0);
-    const [types, setTypes] = useState([{ name: "", description: "" }]);
-    const [abilities, setAbilities] = useState([{ name: "", description: "" }]);
-    const [moves, setMoves] = useState([{ id: 0, learning: "" }]);
-    const [species, setSpecies] = useState("");
-    const [baseExperience, setBaseExperience] = useState(0);
-    const [heldItems, setHeldItems] = useState("");
-    const [evolutionChain, setEvolutionChain] = useState("");
-    const [genera, setGenera] = useState("");
-    const [originGeneration, setOriginGeneration] = useState("");
-    const [habitat, setHabitat] = useState("");
-    const [shape, setShape] = useState("");
-    const [color, setColor] = useState("");
-    const [flavorText, setFlavorText] = useState("");
-    const [firstForm, setFirstForm] = useState({ name: "", id: 0 });
-    const [secondForm, setSecondForm] = useState([
-        { name: "", level: 0, id: 0 },
-    ]);
-    const [thirdForm, setThirdForm] = useState([{ name: "", level: 0, id: 0 }]);
-    const [location, setLocation] = useState([{ name: "", version: "" }]);
-    const [stats, setStats] = useState({
-        hp: 0,
-        attack: 0,
-        defense: 0,
-        specialAttack: 0,
-        specialDefense: 0,
-        speed: 0,
-    });
-
+    const [data, setData] = useState<PokemonData>();
     const [spinnerLoading, setSpinnerLoading] = useState(true);
 
     useEffect(() => {
@@ -49,18 +79,7 @@ export function FullDataPokemon() {
                 })
                 .then(
                     (result) => {
-                        setId(result.id);
-                        setName(result.name);
-                        setSprite(result.fullSprite);
-                        setHeight(result.height);
-                        setWeight(result.weight);
-                        setTypes(result.types);
-                        setAbilities(result.abilities);
-                        setMoves(result.moves);
-                        setSpecies(result.species);
-                        setBaseExperience(result.baseExperience);
-                        setHeldItems(result.heldItems);
-                        setStats(result.stats);
+                        setData(result);
                         console.log("endfetchpokemon");
                     },
                     (error) => {
@@ -79,7 +98,7 @@ export function FullDataPokemon() {
                 .then(
                     (result) => {
                         console.log("beginfetchlocation");
-                        setLocation(result);
+                        setData({ ...data, ...result });
                         console.log("endfetchlocation");
                     },
                     (error) => {
@@ -94,20 +113,14 @@ export function FullDataPokemon() {
 
     useEffect(() => {
         const fetcherSpecies = async () => {
-            await fetch(`http://localhost:5000/species/${species}`, {})
+            await fetch(`http://localhost:5000/species/${data?.species}`, {})
                 .then((res) => {
                     return res.json();
                 })
                 .then(
                     (result) => {
                         console.log("beginfetchspecies");
-                        setEvolutionChain(result.evolutionChain);
-                        setGenera(result.genera);
-                        setOriginGeneration(result.originGeneration);
-                        setHabitat(result.habitat);
-                        setShape(result.shape);
-                        setColor(result.color);
-                        setFlavorText(result.flavorText);
+                        setData({ ...data, ...result });
                     },
                     (error) => {
                         console.log(error);
@@ -115,12 +128,12 @@ export function FullDataPokemon() {
                 );
         };
         fetcherSpecies();
-    }, [species]);
+    }, [data?.species]);
 
     useEffect(() => {
         const fetcherEvolutionChain = async () => {
             await fetch(
-                `http://localhost:5000/evolution-chain/${evolutionChain}`,
+                `http://localhost:5000/evolution-chain/${data?.evolutionChain}`,
                 {}
             )
                 .then((res) => {
@@ -129,11 +142,9 @@ export function FullDataPokemon() {
                 .then(
                     (result) => {
                         console.log("beginfetchevolutionchain");
-                        setFirstForm(result.firstForm);
-                        setSecondForm(result.secondForm);
-                        setThirdForm(result.thirdForm);
+                        setData({ ...data, ...result });
                         console.log("endfetchevolutionchain");
-                        if (evolutionChain) {
+                        if (data?.evolutionChain) {
                             setSpinnerLoading(false);
                         }
                     },
@@ -143,7 +154,7 @@ export function FullDataPokemon() {
                 );
         };
         fetcherEvolutionChain();
-    }, [evolutionChain]);
+    }, [data?.evolutionChain]);
 
     return (
         <>
@@ -154,129 +165,31 @@ export function FullDataPokemon() {
             ) : (
                 <div className={`fullDataPokemon id${idPokemon}`}>
                     <div className="row">
-                        <div className="column descriptionPokemon">
-                            <div className="flavorText descriptionPart">
-                                <span className="miniTitle">
-                                    Flavor text from Sword-Shield :
-                                </span>{" "}
-                                {flavorText}
-                            </div>
-                            <div className="descriptionPart">
-                                <span className="miniTitle"> Genera : </span>
-                                {genera}
-                            </div>
-                            <div className="descriptionPart">
-                                <span className="miniTitle"> Habitat : </span>
-                                {habitat}
-                            </div>
-                            <div className="descriptionPart">
-                                <span className="miniTitle">
-                                    {" "}
-                                    First Apparition :{" "}
-                                </span>
-                                {originGeneration}
-                            </div>
-                            <div className="descriptionPart">
-                                <span className="miniTitle"> Shape : </span>
-                                {shape}
-                            </div>
-                            <div className="descriptisecondFormonPart">
-                                <span className="miniTitle"> Color : </span>
-                                {color}
-                            </div>
-                            <div className="descriptionPart encounterPart">
-                                <span className="miniTitle">
-                                    Location to encounter :{" "}
-                                </span>
-                                <div className="encountersList">
-                                    {location &&
-                                        location.map((location, index) => {
-                                            return (
-                                                <div
-                                                    className="locationWrapper"
-                                                    key={index}
-                                                >
-                                                    {location.name} :{" "}
-                                                    {location.version}
-                                                </div>
-                                            );
-                                        })}
-                                </div>
-                            </div>
-                            <div className="abilitiesWrapper">
-                                <span className="miniTitle"> Abilities : </span>
-                                {abilities.map((ability, index) => {
-                                    return (
-                                        <div
-                                            className="abilityWrapper"
-                                            key={index}
-                                        >
-                                            {ability.name}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                            <div className="evolutionWrapper">
-                                {firstForm && (
-                                    <img
-                                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstForm.id}.png`}
-                                        alt={name}
-                                        className="imgEvolution"
-                                    />
-                                )}
-                                {secondForm && (
-                                    <>
-                                        <img
-                                            src={`https://cdn-icons-png.flaticon.com/512/545/545682.png`}
-                                            alt={"arrow"}
-                                            className="arrowEvolution"
-                                        />
-                                        <img
-                                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondForm[0].id}.png`}
-                                            alt={name}
-                                            className="imgEvolution"
-                                        />
-                                    </>
-                                )}
-                                {thirdForm && (
-                                    <>
-                                        <img
-                                            src={`https://cdn-icons-png.flaticon.com/512/545/545682.png`}
-                                            alt={"arrow"}
-                                            className="arrowEvolution"
-                                        />
-
-                                        <img
-                                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdForm[0].id}.png`}
-                                            alt={name}
-                                            className="imgEvolution"
-                                        />
-                                    </>
-                                )}
-                            </div>
-                        </div>
+                        <DescriptionPokemon data={data} />
                         <div className="column baseInfoPokemon">
                             <div className="row rowIdName">
-                                <p className="emphasized">#{id}</p>
+                                <p className="emphasized">#{data?.id}</p>
                                 <p>
                                     Nom :{" "}
-                                    <span className="emphasized">{name}</span>
+                                    <span className="emphasized">
+                                        {data?.name}
+                                    </span>
                                 </p>
                             </div>
                             <img
-                                src={fullSprite}
-                                alt={name}
+                                src={data?.fullSprite}
+                                alt={data?.name}
                                 className="mainImg"
                             />
-                            <p>BaseExperience: {baseExperience}</p>
-                            {heldItems !== undefined ? (
-                                <p>{`Held Items : ${heldItems}`}</p>
+                            <p>BaseExperience: {data?.baseExperience}</p>
+                            {data?.heldItems !== undefined ? (
+                                <p>{`Held Items : ${data?.heldItems}`}</p>
                             ) : null}
-                            <p>Height : {height}</p>
-                            <p>Weight : {weight}</p>
+                            <p>Height : {data?.height}</p>
+                            <p>Weight : {data?.weight}</p>
                             <h4>Types</h4>
                             <div className="row">
-                                {types.map((type, index) => {
+                                {data?.types.map((type, index) => {
                                     return (
                                         <div
                                             key={index}
@@ -293,63 +206,125 @@ export function FullDataPokemon() {
                         <div className="row stat">
                             <div className="summaryStat">
                                 <h4 className="titleStat">HP</h4>
-                                {stats.hp}
+                                {data?.stats.hp}
                             </div>
                             <div className="backStat">
-                                <div className="hpStat"></div>
+                                <div
+                                    className="hpStat"
+                                    style={{
+                                        width: `${
+                                            data && data.stats.hp / 2.55
+                                        }%`,
+                                        height: `100%`,
+                                        backgroundColor: `#f53006`,
+                                    }}
+                                ></div>
                             </div>
                         </div>
                         <div className="row stat">
                             <div className="summaryStat row">
                                 <h4 className="titleStat">ATTACK</h4>
-                                {stats.attack}
+                                {data?.stats.attack}
                             </div>
                             <div className="backStat">
-                                <div className="attackStat"></div>
+                                <div
+                                    className="attackStat"
+                                    style={{
+                                        width: `${
+                                            data && data.stats.attack / 2.55
+                                        }%`,
+                                        height: `100%`,
+                                        backgroundColor: `#f53006`,
+                                    }}
+                                ></div>
                             </div>
                         </div>
                         <div className="row stat">
                             <div className="summaryStat">
                                 <h4 className="titleStat">DEFENSE</h4>
-                                {stats.defense}
+                                {data?.stats.defense}
                             </div>
                             <div className="backStat">
-                                <div className="defenseStat"></div>
+                                <div
+                                    className="defenseStat"
+                                    style={{
+                                        width: `${
+                                            data && data.stats.defense / 2.55
+                                        }%`,
+                                        height: `100%`,
+                                        backgroundColor: `#f53006`,
+                                    }}
+                                ></div>
                             </div>
                         </div>
                         <div className="row stat">
                             <div className="summaryStat">
                                 <h4 className="titleStat">HP</h4>
-                                {stats.hp}
+                                {data?.stats.hp}
                             </div>
                             <div className="backStat">
-                                <div className="specialAttackStat"></div>
+                                <div
+                                    className="specialAttackStat"
+                                    style={{
+                                        width: `${
+                                            data &&
+                                            data.stats.specialAttack / 2.55
+                                        }%`,
+                                        height: `100%`,
+                                        backgroundColor: `#f53006`,
+                                    }}
+                                ></div>
                             </div>
                         </div>
                         <div className="row stat">
-                            <h4 className="titleStat">SPECIAL DEFENSE</h4>
+                            <div className="summaryStat">
+                                <h4 className="titleStat">SPECIAL DEFENSE</h4>
+                                {data?.stats.specialDefense}
+                            </div>
                             <div className="backStat">
-                                <div className="specialDefenseStat"></div>
+                                <div
+                                    className="specialDefenseStat"
+                                    style={{
+                                        width: `${
+                                            data &&
+                                            data.stats.specialDefense / 2.55
+                                        }%`,
+                                        height: `100%`,
+                                        backgroundColor: `#f53006`,
+                                    }}
+                                ></div>
                             </div>
                         </div>
                         <div className="row stat">
-                            <h4 className="titleStat">SPEED</h4>
+                            <div className="summaryStat">
+                                <h4 className="titleStat">SPEED</h4>
+                                {data?.stats.speed}
+                            </div>
                             <div className="backStat">
-                                <div className="speedStat"></div>
+                                <div
+                                    className="speedStat"
+                                    style={{
+                                        width: `${
+                                            data && data.stats.speed / 2.55
+                                        }%`,
+                                        height: `100%`,
+                                        backgroundColor: `#f53006`,
+                                    }}
+                                ></div>
                             </div>
                         </div>
                     </div>
                     <div className="movesList">
                         <h4>Moves</h4>
-                        {moves.map((move, index) => {
+                        {data?.moves.map((move, index) => {
                             return (
                                 <MovePokemon
+                                    key={index}
                                     idMove={move.id}
                                     learning={move.learning}
                                 />
                             );
                         })}
-                        ;
                     </div>
                 </div>
             )}

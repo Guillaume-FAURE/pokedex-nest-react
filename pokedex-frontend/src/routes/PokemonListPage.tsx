@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import { useState } from "react";
 import { SmallDataPokemon } from "../components/SmallDataPokemon";
 import "./PokemonListPage.css";
@@ -7,10 +6,13 @@ import arrowForward from "../assets/arrowForward.png";
 export function PokemonListPage() {
     const [idPage, setIdPage] = useState(1);
     const pokemonlist: Array<unknown> = [];
+    const controller = new AbortController();
 
-    for (let i = 30 * (idPage - 1) + 1; i <= 30 * idPage; i++) {
+    for (let i = 10 * (idPage - 1) + 1; i <= 10 * idPage; i++) {
         i < 899
-            ? pokemonlist.push(<SmallDataPokemon idPokemon={i} />)
+            ? pokemonlist.push(
+                  <SmallDataPokemon idPokemon={i} controller={controller} />
+              )
             : console.log("all pokemon charged");
     }
 
@@ -21,10 +23,11 @@ export function PokemonListPage() {
                     key={`arrowLeft${idPage}`}
                     className={`arrowPage`}
                     onClick={() => {
+                        controller.abort();
                         pokemonlist.slice(0, pokemonlist.length);
                         idPage > 1
                             ? setIdPage(idPage - 1)
-                            : setIdPage(29 + idPage);
+                            : setIdPage(89 + idPage);
                     }}
                 >
                     <img
@@ -35,15 +38,16 @@ export function PokemonListPage() {
                         height={`50px`}
                     />
                 </div>
-                <h4>{idPage}/30</h4>
+                <h4>{idPage}/90</h4>
                 <div
                     key={`arrowRight${idPage}`}
                     className={`arrowPage`}
                     onClick={() => {
+                        controller.abort();
                         pokemonlist.slice(0, pokemonlist.length);
-                        idPage < 30
+                        idPage < 90
                             ? setIdPage(idPage + 1)
-                            : setIdPage(idPage - 29);
+                            : setIdPage(idPage - 89);
                     }}
                 >
                     <img
@@ -60,10 +64,11 @@ export function PokemonListPage() {
                     key={`arrowLeft${idPage}`}
                     className={`arrowPage`}
                     onClick={() => {
+                        controller.abort();
                         pokemonlist.slice(0, pokemonlist.length);
                         idPage > 1
                             ? setIdPage(idPage - 1)
-                            : setIdPage(29 + idPage);
+                            : setIdPage(89 + idPage);
                     }}
                 >
                     <img
@@ -74,15 +79,16 @@ export function PokemonListPage() {
                         height={`50px`}
                     />
                 </div>
-                <h4>{idPage}/30</h4>
+                <h4>{idPage}/90</h4>
                 <div
                     key={`arrowRight${idPage}`}
                     className={`arrowPage`}
                     onClick={() => {
+                        controller.abort();
                         pokemonlist.slice(0, pokemonlist.length);
-                        idPage < 30
+                        idPage < 90
                             ? setIdPage(idPage + 1)
-                            : setIdPage(idPage - 29);
+                            : setIdPage(idPage - 89);
                     }}
                 >
                     <img

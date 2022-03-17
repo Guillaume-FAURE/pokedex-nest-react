@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import "./MovePokemon.css";
 
-type AppProps = {
+type Props = {
     idMove: number;
     learning: string;
 };
 
-export function MovePokemon({ idMove, learning }: AppProps) {
-    const [id, setId] = useState(0);
-    const [name, setName] = useState("");
-    const [accuracy, setAccuracy] = useState(0);
-    const [classAttack, setClassAttack] = useState("");
-    const [power, setPower] = useState(0);
-    const [pp, setPp] = useState(0);
-    const [priority, setPriority] = useState(0);
-    const [type, setType] = useState("");
+type DataPokemon = {
+    id: number;
+    name: string;
+    accuracy: number;
+    class: string;
+    power: number;
+    pp: number;
+    priority: number;
+    type: string;
+};
+
+export function MovePokemon({ idMove, learning }: Props) {
+    const [data, setData] = useState<DataPokemon>();
 
     useEffect(() => {
         const fetcherMoves = async () => {
@@ -25,14 +29,7 @@ export function MovePokemon({ idMove, learning }: AppProps) {
                     })
                     .then(
                         (result) => {
-                            setId(result.id);
-                            setName(result.name);
-                            setAccuracy(result.accuracy);
-                            setClassAttack(result.class);
-                            setPower(result.power);
-                            setPp(result.pp);
-                            setPriority(result.priority);
-                            setType(result.type);
+                            setData(result);
                         },
                         (error) => {
                             console.log(error);
@@ -46,21 +43,19 @@ export function MovePokemon({ idMove, learning }: AppProps) {
     return (
         <div className={`moveData id${idMove}`}>
             <div className="row">
-                <div className="nameMove moveDescription">{name}</div>
-                <div className="idMove moveDescription">id : {id}</div>
+                <div className="nameMove moveDescription">{data?.name}</div>
+                <div className="idMove moveDescription">id : {data?.id}</div>
 
                 <div className="accuracyMove moveDescription">
-                    accuracy : {accuracy !== undefined ? accuracy : "--"}
+                    accuracy :{" "}
+                    {data?.accuracy !== undefined ? data.accuracy : "--"}
                 </div>
-                <div className="classMove moveDescription">{classAttack}</div>
+                <div className="classMove moveDescription">{data?.class}</div>
                 <div className="powerMove moveDescription">
-                    power : {power !== undefined ? power : "--"}
+                    power : {data?.power !== undefined ? data.power : "--"}
                 </div>
-                <div className="ppMove moveDescription">pp : {pp}</div>
-                {/* <div className="priorityMove moveDescription">
-                    priority : {priority}
-                </div> */}
-                <div className="typeMove moveDescription">{type}</div>
+                <div className="ppMove moveDescription">pp : {data?.pp}</div>
+                <div className="typeMove moveDescription">{data?.type}</div>
                 <div className="levelMove moveDescription">
                     method : {learning}
                 </div>

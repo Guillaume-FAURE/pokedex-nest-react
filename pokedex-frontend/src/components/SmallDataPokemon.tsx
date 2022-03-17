@@ -1,14 +1,14 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import "./SmallData.css";
 import { NavLink } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 
-type AppProps = {
+type Props = {
     idPokemon: number;
+    controller: AbortController;
 };
 
-export function SmallDataPokemon({ idPokemon }: AppProps) {
-    const controller = new AbortController();
+export function SmallDataPokemon({ idPokemon, controller }: Props) {
     const signal = controller.signal;
     const [id, setId] = useState(0);
     const [name, setName] = useState("");
